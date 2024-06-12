@@ -1,0 +1,14 @@
+#cloud-config
+users:
+  - name: chris
+    ssh-authorized-keys:
+      - "op://Development/DigitalOcean_Personal/public key"
+      - "op://Development/Digital_Ocean_Ansible/public key"
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    groups: sudo
+    shell: /bin/bash
+runcmd:
+  - sed -i -e '/^Port/s/^.*$/Port 4444/' /etc/ssh/sshd_config
+  - sed -i -e '/^PermitRootLogin/s/^.*$/PermitRootLogin no/' /etc/ssh/sshd_config
+  - sed -i -e '$aAllowUsers chris' /etc/ssh/sshd_config
+  - restart ssh  
