@@ -72,4 +72,8 @@ build {
     ]
   }
 
+  provisioner "ansible" {
+    playbook_file = "../ansible/playbooks/apt.yml"
+  }
+
 }
